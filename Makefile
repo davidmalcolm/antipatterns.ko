@@ -1,5 +1,5 @@
 obj-m := antipatterns.o
-antipatterns-y := bug.o infoleaks.o main.o taint.o
+antipatterns-y := bug.o fmtstring.o infoleaks.o main.o taint.o
 
 KDIR  := /lib/modules/$(shell uname -r)/build
 PWD   := $(shell pwd)
