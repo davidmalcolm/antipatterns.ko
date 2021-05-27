@@ -12,7 +12,7 @@
 #include <linux/printk.h>
 #include <linux/uaccess.h>
 
-int user_controlled_printk (void *__user src)
+int user_controlled_printk (void __user *src)
 {
   char buf[256];
   if (copy_from_user(buf, src, sizeof(buf)))

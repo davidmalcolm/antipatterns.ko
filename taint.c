@@ -16,7 +16,7 @@ struct cmd_1
   u32 val;
 };
 
-int taint_array_access(void *__user src, u32 *arr)
+int taint_array_access(void __user *src, u32 *arr)
 {
   struct cmd_1 cmd;
   if (copy_from_user(&cmd, src, sizeof(cmd)))
@@ -35,7 +35,7 @@ struct cmd_2
   u32 val;
 };
 
-int taint_signed_array_access(void *__user src, u32 *arr)
+int taint_signed_array_access(void __user *src, u32 *arr)
 {
   struct cmd_2 cmd;
   if (copy_from_user(&cmd, src, sizeof(cmd)))
@@ -58,7 +58,7 @@ struct cmd_s32_binop
   s32 result;
 };
 
-int taint_divide_by_zero_direct(void *__user src)
+int taint_divide_by_zero_direct(void __user *src)
 {
   struct cmd_s32_binop cmd;
   if (copy_from_user(&cmd, src, sizeof(cmd)))
@@ -72,7 +72,7 @@ int taint_divide_by_zero_direct(void *__user src)
   return 0;
 }
 
-int taint_divide_by_zero_compound(void *__user src)
+int taint_divide_by_zero_compound(void __user *src)
 {
   struct cmd_s32_binop cmd;
   if (copy_from_user(&cmd, src, sizeof(cmd)))
@@ -89,7 +89,7 @@ int taint_divide_by_zero_compound(void *__user src)
   return 0;
 }
 
-int taint_mod_by_zero_direct(void *__user src)
+int taint_mod_by_zero_direct(void __user *src)
 {
   struct cmd_s32_binop cmd;
   if (copy_from_user(&cmd, src, sizeof(cmd)))
@@ -103,7 +103,7 @@ int taint_mod_by_zero_direct(void *__user src)
   return 0;
 }
 
-int taint_mod_by_zero_compound(void *__user src)
+int taint_mod_by_zero_compound(void __user *src)
 {
   struct cmd_s32_binop cmd;
   if (copy_from_user(&cmd, src, sizeof(cmd)))
