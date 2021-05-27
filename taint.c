@@ -67,7 +67,7 @@ int taint_divide_by_zero_direct(void __user *src)
   /* cmd.b is attacker-controlled and could be zero */
   cmd.result = cmd.a / cmd.b;
 
-  if (copy_to_user (&cmd, src, sizeof(cmd)))
+  if (copy_to_user (src, &cmd, sizeof(cmd)))
     return -EFAULT;
   return 0;
 }
@@ -84,7 +84,7 @@ int taint_divide_by_zero_compound(void __user *src)
    */
   cmd.result = cmd.a / (cmd.b + 1);
 
-  if (copy_to_user (&cmd, src, sizeof(cmd)))
+  if (copy_to_user (src, &cmd, sizeof(cmd)))
     return -EFAULT;
   return 0;
 }
@@ -98,7 +98,7 @@ int taint_mod_by_zero_direct(void __user *src)
   /* cmd.b is attacker-controlled and could be zero */
   cmd.result = cmd.a % cmd.b;
 
-  if (copy_to_user (&cmd, src, sizeof(cmd)))
+  if (copy_to_user (src, &cmd, sizeof(cmd)))
     return -EFAULT;
   return 0;
 }
@@ -115,7 +115,7 @@ int taint_mod_by_zero_compound(void __user *src)
    */
   cmd.result = cmd.a % (cmd.b + 1);
 
-  if (copy_to_user (&cmd, src, sizeof(cmd)))
+  if (copy_to_user (src, &cmd, sizeof(cmd)))
     return -EFAULT;
   return 0;
 }
