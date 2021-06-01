@@ -2,8 +2,6 @@
 /*
  * Various bogus uses of format strings (CWE-134), to see if these are
  * detectable.
- * TODO: expose these (e.g. as ioctls) so they can actually be triggered
- * at run-time.
  *
  * (C) 2021 David Malcolm, Red Hat
  * Written by David Malcolm <dmalcolm@redhat.com>
@@ -11,6 +9,7 @@
 
 #include <linux/printk.h>
 #include <linux/uaccess.h>
+#include "antipatterns.h"
 
 int user_controlled_printk (void __user *src)
 {

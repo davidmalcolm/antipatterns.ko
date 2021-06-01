@@ -1,14 +1,13 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
  * Various blithe uses of attacker-controlled values.
- * TODO: expose these (e.g. as ioctls) so they can actually be triggered
- * at run-time.
  *
  * (C) 2021 David Malcolm, Red Hat
  * Written by David Malcolm <dmalcolm@redhat.com>
  */
 
 #include <linux/uaccess.h>
+#include "antipatterns.h"
 
 struct cmd_1
 {
@@ -16,7 +15,9 @@ struct cmd_1
   u32 val;
 };
 
-int taint_array_access(void __user *src, u32 *arr)
+static u32 arr[16];
+
+int taint_array_access(void __user *src)
 {
   struct cmd_1 cmd;
   if (copy_from_user(&cmd, src, sizeof(cmd)))
@@ -35,7 +36,7 @@ struct cmd_2
   u32 val;
 };
 
-int taint_signed_array_access(void __user *src, u32 *arr)
+int taint_signed_array_access(void __user *src)
 {
   struct cmd_2 cmd;
   if (copy_from_user(&cmd, src, sizeof(cmd)))

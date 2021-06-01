@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
  * Various infoleaks (CWE-200).
- * TODO: expose these (e.g. as ioctls) so they can actually be triggered
- * at run-time.
  *
  * (C) 2021 David Malcolm, Red Hat
  * Written by David Malcolm <dmalcolm@redhat.com>
@@ -10,6 +8,7 @@
 
 #include <linux/uaccess.h>
 #include <linux/slab.h>
+#include "antipatterns.h"
 
 struct infoleak_buf
 {

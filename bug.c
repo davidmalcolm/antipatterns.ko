@@ -1,14 +1,13 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
  * Various uses of BUG, to see if these are detectable.
- * TODO: expose these (e.g. as ioctls) so they can actually be triggered
- * at run-time.
  *
  * (C) 2021 David Malcolm, Red Hat
  * Written by David Malcolm <dmalcolm@redhat.com>
  */
 
 #include <linux/bug.h>
+#include "antipatterns.h"
 
 /*
  * Unconditional usage of BUG.
