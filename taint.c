@@ -58,24 +58,24 @@ struct cmd_s32_binop
   s32 result;
 };
 
-int taint_divide_by_zero_direct(void __user *src)
+int taint_divide_by_zero_direct(void __user *uptr)
 {
   struct cmd_s32_binop cmd;
-  if (copy_from_user(&cmd, src, sizeof(cmd)))
+  if (copy_from_user(&cmd, uptr, sizeof(cmd)))
     return -EFAULT;
 
   /* cmd.b is attacker-controlled and could be zero */
   cmd.result = cmd.a / cmd.b;
 
-  if (copy_to_user (src, &cmd, sizeof(cmd)))
+  if (copy_to_user (uptr, &cmd, sizeof(cmd)))
     return -EFAULT;
   return 0;
 }
 
-int taint_divide_by_zero_compound(void __user *src)
+int taint_divide_by_zero_compound(void __user *uptr)
 {
   struct cmd_s32_binop cmd;
-  if (copy_from_user(&cmd, src, sizeof(cmd)))
+  if (copy_from_user(&cmd, uptr, sizeof(cmd)))
     return -EFAULT;
 
   /*
@@ -84,29 +84,29 @@ int taint_divide_by_zero_compound(void __user *src)
    */
   cmd.result = cmd.a / (cmd.b + 1);
 
-  if (copy_to_user (src, &cmd, sizeof(cmd)))
+  if (copy_to_user (uptr, &cmd, sizeof(cmd)))
     return -EFAULT;
   return 0;
 }
 
-int taint_mod_by_zero_direct(void __user *src)
+int taint_mod_by_zero_direct(void __user *uptr)
 {
   struct cmd_s32_binop cmd;
-  if (copy_from_user(&cmd, src, sizeof(cmd)))
+  if (copy_from_user(&cmd, uptr, sizeof(cmd)))
     return -EFAULT;
 
   /* cmd.b is attacker-controlled and could be zero */
   cmd.result = cmd.a % cmd.b;
 
-  if (copy_to_user (src, &cmd, sizeof(cmd)))
+  if (copy_to_user (uptr, &cmd, sizeof(cmd)))
     return -EFAULT;
   return 0;
 }
 
-int taint_mod_by_zero_compound(void __user *src)
+int taint_mod_by_zero_compound(void __user *uptr)
 {
   struct cmd_s32_binop cmd;
-  if (copy_from_user(&cmd, src, sizeof(cmd)))
+  if (copy_from_user(&cmd, uptr, sizeof(cmd)))
     return -EFAULT;
 
   /*
@@ -115,7 +115,7 @@ int taint_mod_by_zero_compound(void __user *src)
    */
   cmd.result = cmd.a % (cmd.b + 1);
 
-  if (copy_to_user (src, &cmd, sizeof(cmd)))
+  if (copy_to_user (uptr, &cmd, sizeof(cmd)))
     return -EFAULT;
   return 0;
 }
